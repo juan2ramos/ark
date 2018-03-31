@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Money from '@/filters/money'
+import BLur from '@/directives/blur'
 
 Vue.config.productionTip = false
-
+Vue.use(Money)
+Vue.use(BLur)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
