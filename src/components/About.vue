@@ -4,12 +4,12 @@
     div(v-blur=1)
       p juan
       button hola
+
 </template>
 
 <script>
   export default {}
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
 </style>
