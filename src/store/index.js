@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import post from './modules/post'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -22,6 +22,17 @@ const store = new Vuex.Store({
     decrement (state) {
       state.count--
     }
+  },
+  actions: {
+    incrementAsync (context, payload) {
+      console.log(context)
+      setTimeout(() => {
+        context.commit('increment', payload)
+      }, 2000)
+    }
+  },
+  modules: {
+    post
   }
 })
 

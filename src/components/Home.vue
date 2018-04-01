@@ -6,24 +6,23 @@
     button( @click="decrement") -
     p
       button( @click="increment10") +10
-    ul(v-for="arknew in arknews")
+    p
+      button( @click="incrementAsync") +Async
+    ul(v-for="arknew in recentPost")
       ark-news(:arknew="arknew")
 </template>
 <script>
-  import api from '@/api'
   import ArkNews from '@/components/news.vue'
-  import { mapMutations, mapState, mapGetters } from 'vuex'
+  import {mapMutations, mapState, mapGetters} from 'vuex'
 
   export default {
     components: {ArkNews},
-    data () {
-      return {
-        arknews: ''
-      }
+    created () {
+      this.$store.dispatch('getPosts', {limit: 10})
     },
     computed: {
-      ...mapState(['count']),
-      ...mapGetters(['doubleCount'])
+      ...mapState(['count', 'recent']),
+      ...mapGetters(['doubleCount', 'recentPost'])
     },
     methods: {
       ...mapMutations(['increment', 'decrement']),
@@ -31,12 +30,12 @@
         this.$store.commit('increment10', {
           number: 10
         })
+      },
+      incrementAsync () {
+        this.$store.dispatch('incrementAsync', {
+          number: 2
+        })
       }
-    },
-    created () {
-      api.getPost().then(r => {
-        this.arknews = r
-      })
     }
   }
 </script>
